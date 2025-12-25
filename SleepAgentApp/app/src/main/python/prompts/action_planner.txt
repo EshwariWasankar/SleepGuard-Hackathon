@@ -1,0 +1,42 @@
+Given these risk scores (0-1), current time, and sleep goal:
+
+EVALUATE → PRIORITIZE → ACT
+
+**Action Priority Matrix:**
+1. Caffeine HIGH + <4hrs → ADJUST_ALARM (+30-60min)
+2. Screen HIGH late → REDUCE_BRIGHTNESS + WARN  
+3. Noise HIGH → ENABLE_WHITE_NOISE
+4. Sleep debt HIGH → ADJUST_ALARM + WARN
+5. Multiple MEDIUM → strongest single intervention
+
+**Urgency Logic:**
+- 1 HIGH risk → HIGH
+- 2+ MEDIUM → HIGH  
+- 1 MEDIUM → MEDIUM
+- LOW risks → NO_ACTION
+
+**Decision Thresholds:**
+- remaining_caffeine_mg > 50 = HIGH caffeine
+- melatonin_suppression_risk > 0.8 = HIGH screen  
+- noise_disruption_risk > 0.65 = HIGH noise
+- sleep_debt_hours > 1.5 = HIGH debt
+- time_to_target_sleep < 4 = time pressure
+
+**NEW ACTION RULES:**
+Noise_disruption_risk > 0.65 → ENABLE_WHITE_NOISE (value: true)
+Melatonin_suppression_risk > 0.8 OR screen >90min → REDUCE_BRIGHTNESS (value: 0.3)  
+Remaining_caffeine_mg > 50 + screen activity → BLOCK_APPS (value: "social,games")
+Sleep_debt_hours > 1.5 → ADJUST_ALARM (value: calculated time)
+
+**Value Examples:**
+- REDUCE_BRIGHTNESS: "value": 0.3
+- ENABLE_WHITE_NOISE: "value": true  
+- BLOCK_APPS: "value": "social,games"
+- ADJUST_ALARM: "value": "07:15"
+
+Keep notification_message <120 chars, science-based.
+Caffeine t½=5hrs, blue light 460nm suppresses melatonin, noise >65dB fragments sleep.
+
+JSON output schema: {action_schema}
+
+Respond JSON ONLY. No explanations.
