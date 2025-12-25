@@ -1,0 +1,8 @@
+{
+  "action": "enum [\"WARN\", \"ADJUST_ALARM\", \"REDUCE_BRIGHTNESS\", \"ENABLE_WHITE_NOISE\", \"BLOCK_APPS\", \"NO_ACTION\"]",
+  "value": "string|float|null (e.g. \"08:15\", 0.4)",
+  "urgency": "enum [\"LOW\", \"MEDIUM\", \"HIGH\"]",
+  "notification_message": "string (max 140 chars, explains WHY)",
+  "confidence": "float (0.0-1.0)",
+  "reasoning_summary": "string (1 sentence scientific justification)"
+}
